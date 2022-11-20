@@ -1,60 +1,56 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import {
+    Image, StyleSheet,
+    View
+} from 'react-native';
+import Card from './Card';
+import Tag from './Tag';
+import Stat from './Stat';
+import Text from './Text';
 
 const styles = StyleSheet.create({
-    container: {
-        paddingTop: 5,
-        paddingLeft: 10,
-        margin: 10,
-        borderColor: "black",
-        borderWidth: 2,
-    },
     flexBox: {
         display: "flex",
         flexDirection: "row",
-        padding: 5
+        padding: 5,
+        // alignItems: "center"
     },
     flexItem: {
-        flexGrow: 1
+        flexGrow: 1,
+        margin: 2
     },
+    flexStats: {
+        paddingRight: 20,
+        paddingLeft: 40
+    },
+
     tinyLogo: {
         width: 50,
         height: 50,
-        borderRadius: 5
+        borderRadius: 5,
+        // marginLeft: 10,
+        marginRight: 10
     }
 });
 
 const RepositoryItem = ({ item }) => {
 
     return (
-        <View style={styles.container}>
+        <Card>
             <View style={styles.flexBox}>
                 <Image style={styles.tinyLogo} source={{ uri: item.ownerAvatarUrl }} />
-                <Text style={styles.flexItem}>Full name: {item.fullName}</Text>
-                <Text style={styles.flexItem}>Description: {item.description}</Text>
-                <Text >Language: {item.language}</Text>
-            </View>
-            <View style={styles.flexBox}>
-                <View style={styles.flexItem}>
-                    <Text>{item.forksCount}</Text>
-                    <Text>Forks</Text>
-
-                </View>
-                <View style={styles.flexItem}>
-                    <Text>{item.stargazersCount}</Text>
-                    <Text>Stars</Text>
-
-                </View >
-                <View style={styles.flexItem}>
-                    <Text>{item.ratingAverage}</Text>
-                    <Text>Rating</Text>
-
-                </View>
-                <View style={styles.flexItem}>
-                    <Text>{item.reviewCount}</Text>
-                    <Text>Reviews</Text>
+                <View >
+                    <Text style={styles.flexItem} fontWeight="bold">{item.fullName}</Text>
+                    <Text style={styles.flexItem}>{item.description}</Text>
+                    <Tag styles={styles.flexItem} text={item.language} />
                 </View>
             </View>
-        </View>
+            <View style={[styles.flexBox, styles.flexStats]}>
+                <Stat styles={styles.flexItem} description="Forks" stat={item.forksCount} />
+                <Stat styles={styles.flexItem} description="Stars" stat={item.stargazersCount} />
+                <Stat styles={styles.flexItem} description="Reviews" stat={item.reviewCount} />
+                <Stat styles={styles.flexItem} description="Rating" stat={item.ratingAverage} />
+            </View>
+        </Card>
     );
 }
 
