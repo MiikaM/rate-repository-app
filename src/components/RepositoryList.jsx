@@ -60,6 +60,8 @@ const repositories = [
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
+
+  console.log("Happens");
   return (
     <FlatList style={styles.container}
       data={repositories}
