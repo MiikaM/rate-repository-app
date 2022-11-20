@@ -7,9 +7,11 @@ import { Link } from 'react-router-native';
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Constants.statusBarHeight + 10,
+        paddingTop: Constants.statusBarHeight + 20,
         backgroundColor: theme.colors.textPrimary,
-        padding: 10,
+        paddingBottom: 20,
+        // paddingLeft: 10,
+        paddingRight: 10,
         marginBottom: 10
     },
     scrollViewContainer: {
@@ -28,10 +30,10 @@ const AppBar = () => {
         <View style={styles.container}>
             <ScrollView horizontal contentContainerStyle={styles.scrollViewContainer}>
                 <Link style={styles.scrollViewItem} to="/" >
-                    <Text fontWeight="bold" color="off-white">Repositories</Text>
+                    <Text fontWeight="bold" color="off-white" fontSize="subheading">Repositories</Text>
                 </Link>
                 <Link style={styles.scrollViewItem} to="/signIn" >
-                    <Text fontWeight="bold" color="off-white">Sign in</Text>
+                    <Text fontWeight="bold" color="off-white" fontSize="subheading">Sign in</Text>
                 </Link>
             </ScrollView>
 

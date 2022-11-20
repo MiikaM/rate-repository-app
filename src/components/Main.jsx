@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     flexShrink: 1,
+    backgroundColor: "#E1E5E8"
+
   },
 });
 
@@ -16,10 +18,10 @@ const Main = () => {
     <View style={styles.container}>
       <AppBar />
       <Routes>
-        <Route path="/" element={<RepositoryList />} exact />
-        <Route path="/signIn" element={<SignIn /> } />
+        <Route path="/signIn" element={<RepositoryList />} exact />
+        <Route path="/" element={<SignIn />} />
         <Route path="*" element={<Navigate to="/" replace />} />
-        
+
       </Routes>
     </View>
   );
