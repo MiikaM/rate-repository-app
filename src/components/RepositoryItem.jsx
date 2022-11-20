@@ -1,17 +1,56 @@
-import { Text, View} from 'react-native';
+import {
+    Image, StyleSheet,
+    View
+} from 'react-native';
+import Card from './Card';
+import Tag from './Tag';
+import Stat from './Stat';
+import Text from './Text';
 
-const RepositoryItem = ({item}) => {
+const styles = StyleSheet.create({
+    flexBox: {
+        display: "flex",
+        flexDirection: "row",
+        padding: 5,
+        // alignItems: "center"
+    },
+    flexItem: {
+        flexGrow: 1,
+        margin: 2
+    },
+    flexStats: {
+        paddingRight: 20,
+        paddingLeft: 40
+    },
+
+    tinyLogo: {
+        width: 50,
+        height: 50,
+        borderRadius: 5,
+        // marginLeft: 10,
+        marginRight: 10
+    }
+});
+
+const RepositoryItem = ({ item }) => {
 
     return (
-        <View>        
-            <Text>Full name: {item.fullName}</Text>
-            <Text>Description: {item.description}</Text>
-            <Text>Language: {item.language}</Text>
-            <Text>Forks: {item.forksCount}</Text>
-            <Text>Stars: {item.stargazersCount}</Text>
-            <Text>Rating: {item.ratingAverage}</Text>
-            <Text>Reviews: {item.reviewCount}</Text>
-        </View>
+        <Card>
+            <View style={styles.flexBox}>
+                <Image style={styles.tinyLogo} source={{ uri: item.ownerAvatarUrl }} />
+                <View >
+                    <Text style={styles.flexItem} fontWeight="bold">{item.fullName}</Text>
+                    <Text style={styles.flexItem}>{item.description}</Text>
+                    <Tag styles={styles.flexItem} text={item.language} />
+                </View>
+            </View>
+            <View style={[styles.flexBox, styles.flexStats]}>
+                <Stat styles={styles.flexItem} description="Forks" stat={item.forksCount} />
+                <Stat styles={styles.flexItem} description="Stars" stat={item.stargazersCount} />
+                <Stat styles={styles.flexItem} description="Reviews" stat={item.reviewCount} />
+                <Stat styles={styles.flexItem} description="Rating" stat={item.ratingAverage} />
+            </View>
+        </Card>
     );
 }
 
