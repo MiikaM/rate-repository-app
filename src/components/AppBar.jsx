@@ -10,9 +10,7 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight + 20,
         backgroundColor: theme.colors.textPrimary,
         paddingBottom: 20,
-        // paddingLeft: 10,
         paddingRight: 10,
-        marginBottom: 10
     },
     scrollViewContainer: {
         display: "flex",

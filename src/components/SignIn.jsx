@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import Card from './Card';
 import FormikTextInput from './FormikTextInput';
 import Text from './Text';
+import * as yup from "yup"
 
 const styles = StyleSheet.create({
     button: {
@@ -13,6 +14,11 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
 })
+
+const validationSchema = yup.object().shape({
+    username: yup.string().min(8, 'Username must be longer or equal than 8 characters').required('Username is required'),
+    password: yup.string().min(5, 'Password must be longer or equal than 5 characters').required('Password is required')
+});
 
 const SignIn = () => {
 
@@ -26,8 +32,8 @@ const SignIn = () => {
 
 
     return (
-        <Card styles={{padding: 10}} >
-            <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        <Card styles={{ padding: 10 }} >
+            <Formik validationSchema={validationSchema} initialValues={initialValues} onSubmit={onSubmit}>
                 {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
             </Formik>
         </Card>
