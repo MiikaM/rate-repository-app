@@ -15,6 +15,7 @@
     "@babel/eslint-parser": "^7.19.1",
     "@expo/metro-config": "^0.5.1",
     "@expo/webpack-config": "^0.17.2",
+    "dotenv": "^16.0.3",
     "eslint": "^8.27.0",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-native": "^4.0.0",
