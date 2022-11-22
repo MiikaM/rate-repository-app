@@ -1,8 +1,11 @@
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../theme';
 import Text from './Text';
-import { Link } from 'react-router-native';
+import { Link, useNavigate } from 'react-router-native';
+import { useApolloClient } from '@apollo/client';
+import useCheckUser from './hooks/checkUser';
+import useAuthStorage from './hooks/useAuthStorage';
 
 
 const styles = StyleSheet.create({
@@ -24,15 +27,34 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+    const authStorage = useAuthStorage();
+    const { data } = useCheckUser();
+    const navigate = useNavigate();
+    const apolloClient = useApolloClient();
+
+    const signOut = (e) => {
+        e.preventDefault();
+        authStorage.removeAccessToken();
+        apolloClient.resetStore();
+        navigate("../", { replace: true });
+    }
+
     return (
         <View style={styles.container}>
             <ScrollView horizontal contentContainerStyle={styles.scrollViewContainer}>
                 <Link style={styles.scrollViewItem} to="/" >
                     <Text fontWeight="bold" color="off-white" fontSize="subheading">Repositories</Text>
                 </Link>
-                <Link style={styles.scrollViewItem} to="/signIn" >
+                {
+                    data?.me ? <Pressable style={styles.scrollViewItem} onPress={signOut} >
+                    <Text fontWeight="bold" color="off-white" fontSize="subheading">Sign Out</Text>
+                </Pressable> : <Link style={styles.scrollViewItem} to="/signIn" >
+                        <Text fontWeight="bold" color="off-white" fontSize="subheading">Sign in</Text>
+                    </Link>
+                }
+                {/* <Link style={styles.scrollViewItem} to="/signIn" >
                     <Text fontWeight="bold" color="off-white" fontSize="subheading">Sign in</Text>
-                </Link>
+                </Link> */}
             </ScrollView>
 
         </View >);

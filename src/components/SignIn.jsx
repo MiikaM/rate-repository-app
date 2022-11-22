@@ -4,6 +4,8 @@ import Card from './Card';
 import FormikTextInput from './FormikTextInput';
 import Text from './Text';
 import * as yup from "yup"
+import useSignIn from './hooks/useSignIn';
+import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
     button: {
@@ -16,15 +18,25 @@ const styles = StyleSheet.create({
 })
 
 const validationSchema = yup.object().shape({
-    username: yup.string().min(8, 'Username must be longer or equal than 8 characters').required('Username is required'),
-    password: yup.string().min(5, 'Password must be longer or equal than 5 characters').required('Password is required')
+    username: yup.string().min(3, 'Username must be longer or equal than 8 characters').required('Username is required'),
+    password: yup.string().min(3, 'Password must be longer or equal than 5 characters').required('Password is required')
 });
 
 const SignIn = () => {
+    const [signIn] = useSignIn();
+    let navigate = useNavigate();
 
-    const onSubmit = (values) => {
-        console.log(values);
+    const onSubmit = async (values) => {
+        const { username, password } = values;
+        try {
+            const { data } = await signIn({username, password});
+            console.log(`Congratulations you logged in as user with accesstoken: ${data.authenticate.accessToken}`);
+            navigate("../", {replace: true})
+        } catch (error) {
+            console.error({ error });
+        }
     };
+
     const initialValues = {
         username: "",
         password: ""
