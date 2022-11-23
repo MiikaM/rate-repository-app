@@ -35,12 +35,12 @@ const styles = StyleSheet.create({
 const RepositoryItem = ({ item }) => {
 
     return (
-        <Card>
+        <Card testID="repositoryItem">
             <View style={styles.flexBox}>
                 <Image style={styles.tinyLogo} source={{ uri: item.ownerAvatarUrl }} />
                 <View >
-                    <Text style={styles.flexItem} fontWeight="bold">{item.fullName}</Text>
-                    <Text style={styles.flexItem}>{item.description}</Text>
+                    <Text testID="name" style={styles.flexItem} fontWeight="bold">{item.fullName}</Text>
+                    <Text testID="description" style={styles.flexItem}>{item.description}</Text>
                     <Tag styles={styles.flexItem} text={item.language} />
                 </View>
             </View>

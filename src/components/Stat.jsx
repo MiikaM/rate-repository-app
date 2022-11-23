@@ -43,7 +43,7 @@ const statFormatter = (number) => {
     // if (typeof(number) !== "number" || typeof(number) !== "bigint") return "";
     for (let index = LookUp.length - 1; index >= 0; index--) {
         if (number >= LookUp[index].value) {
-            const formattedNumber = `${Math.round(number / LookUp[index].value).toFixed(
+            const formattedNumber = `${(number / LookUp[index].value).toFixed(
                 1
             )}${LookUp[index].key}`;
             return formattedNumber;
