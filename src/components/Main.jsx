@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import { Navigate, Route, Routes } from 'react-router-native';
 import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
-import SignIn from './SignIn';
+import SignInContainer from './SignInContainer';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +19,7 @@ const Main = () => {
       <AppBar />
       <Routes>
         <Route path="/" element={<RepositoryList />} exact />
-        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/signIn" element={<SignInContainer />} />
         <Route path="*" element={<Navigate to="/" replace />} />
 
       </Routes>

@@ -52,9 +52,6 @@ const AppBar = () => {
                         <Text fontWeight="bold" color="off-white" fontSize="subheading">Sign in</Text>
                     </Link>
                 }
-                {/* <Link style={styles.scrollViewItem} to="/signIn" >
-                    <Text fontWeight="bold" color="off-white" fontSize="subheading">Sign in</Text>
-                </Link> */}
             </ScrollView>
 
         </View >);
