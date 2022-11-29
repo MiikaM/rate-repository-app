@@ -1,10 +1,9 @@
-import { Pressable, StyleSheet, View } from "react-native"
+import {  Pressable, StyleSheet, View } from "react-native"
 // import theme from "../theme"
 
 const styles = StyleSheet.create({
     container: {
-        paddingLeft: 10,
-        paddingRight: 10,
+        padding: 10,
         marginBottom: 5,
         borderRadius: 1,
         shadowColor: "black",
@@ -12,7 +11,7 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOpacity: 0.1,
         elevation: 1,
-        backgroundColor: "white"
+        backgroundColor: "white",
     }
 })
 

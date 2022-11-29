@@ -45,25 +45,25 @@ query Repository($id: ID!) {
 }
 `;
 
-// export const GET_REPOSITORY_REVIEWS = gql`
-// query reviews($id: String!) {
-//   repository($id) {
-//     id
-//     fullName
-//     reviews {
-//       edges {
-//         node {
-//           id
-//           text
-//           rating
-//           createdAt
-//           user {
-//             id
-//             username
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-// `
+export const GET_REVIEWS = gql`
+query Reviews($id: ID!) {
+  repository(id: $id) {
+    id
+    fullName
+    reviews {
+      edges {
+        node {
+          id
+          text
+          rating
+          createdAt
+          user {
+            id
+            username
+          }
+        }
+      }
+    }
+  }
+}
+`

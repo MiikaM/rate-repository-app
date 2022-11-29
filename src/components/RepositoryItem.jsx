@@ -1,6 +1,6 @@
 import {
 
-    Image,  StyleSheet,
+    Image, StyleSheet,
     View
 } from 'react-native';
 import Card from './Card';
@@ -35,21 +35,20 @@ const styles = StyleSheet.create({
 const RepositoryItem = ({ item, navigation, itemView = false }) => {
     const navigate = (event) => {
         event.preventDefault();
-        navigation({ id: item.id });
+        !itemView ? navigation({ id: item.id }) : null;
     }
 
     const openGithub = (event) => {
         event.preventDefault();
         console.log('This happens');
-        
+
         Linking.openURL(item.url);
     }
 
-    // if (!item) return null;
+    if (!item) return null;
 
     return (
-        <Card testID="repositoryItem" onPress={navigate} >
-
+        <Card testID="repositoryItem" onPress={!itemView ? navigate : null} >
             <View style={styles.flexBox}>
                 <Image style={styles.tinyLogo} source={{ uri: item.ownerAvatarUrl }} />
                 <View >
@@ -67,7 +66,6 @@ const RepositoryItem = ({ item, navigation, itemView = false }) => {
             {
                 itemView ? <Button onPress={openGithub} title='Open in GitHub' /> : null
             }
-            {/* </Pressable > */}
 
         </Card>
 
