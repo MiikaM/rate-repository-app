@@ -4,6 +4,8 @@ import { setContext } from '@apollo/client/link/context';
 // You might need to change this depending on how you have configured the Apollo Server's URI
 const { apollo_uri } = Constants.manifest.extra;
 
+console.log({apollo_uri});
+
 const httpLink = createHttpLink({
   uri: apollo_uri,
 });

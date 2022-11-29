@@ -7,3 +7,7 @@ mutation authenticate($username: String!, $password: String!){
     }
   }
 `
+
+//TODO
+// export const CREATE_REVIEW = gql`
+// mutation createReview($fullName: String!, $rating: Int!, $text: String!, id:)`

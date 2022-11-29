@@ -1,18 +1,20 @@
 import {
-    Image, StyleSheet,
+
+    Image,  StyleSheet,
     View
 } from 'react-native';
 import Card from './Card';
 import Tag from './Tag';
 import Stat from './Stat';
 import Text from './Text';
+import Button from './Button';
+import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
     flexBox: {
         display: "flex",
         flexDirection: "row",
         padding: 5,
-        // alignItems: "center"
     },
     flexItem: {
         flexGrow: 1,
@@ -22,20 +24,32 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         paddingLeft: 40
     },
-
     tinyLogo: {
         width: 50,
         height: 50,
         borderRadius: 5,
-        // marginLeft: 10,
         marginRight: 10
     }
 });
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, navigation, itemView = false }) => {
+    const navigate = (event) => {
+        event.preventDefault();
+        navigation({ id: item.id });
+    }
+
+    const openGithub = (event) => {
+        event.preventDefault();
+        console.log('This happens');
+        
+        Linking.openURL(item.url);
+    }
+
+    // if (!item) return null;
 
     return (
-        <Card testID="repositoryItem">
+        <Card testID="repositoryItem" onPress={navigate} >
+
             <View style={styles.flexBox}>
                 <Image style={styles.tinyLogo} source={{ uri: item.ownerAvatarUrl }} />
                 <View >
@@ -50,7 +64,13 @@ const RepositoryItem = ({ item }) => {
                 <Stat styles={styles.flexItem} description="Reviews" stat={item.reviewCount} />
                 <Stat styles={styles.flexItem} description="Rating" stat={item.ratingAverage} />
             </View>
+            {
+                itemView ? <Button onPress={openGithub} title='Open in GitHub' /> : null
+            }
+            {/* </Pressable > */}
+
         </Card>
+
     );
 }
 

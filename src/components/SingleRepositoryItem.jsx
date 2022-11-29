@@ -1,16 +1,24 @@
 import { View } from "react-native";
-import ReviewsSection from "./ReviewsSection";
+// import ReviewsSection from "./ReviewsSection";
+import useRepository from "./hooks/useRepository";
+import { useParams } from "react-router-native";
 import RepositoryItem from "./RepositoryItem";
 
 
-const SingleRepository = () => {
- 
+const SingleRepositoryItem = () => {
+    // Change to get one repository info
+    const { repositoryId } = useParams();
+    const { data, loading } = useRepository({ id: repositoryId });
+
+    
+
     return (
         <View>
-            <RepositoryInfo />
-            <ReviewsSection />
+            {loading ? null : <RepositoryItem item={data.repository} itemView={true} />}
+
+            {/* // <ReviewsSection /> */}
         </View>
     )
 }
 
-export default SingleRepository;
+export default SingleRepositoryItem;

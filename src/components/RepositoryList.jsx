@@ -1,10 +1,12 @@
+import { View } from 'react-native';
 import useRepositories from './hooks/useRepositories';
 import { RepositoryListContainer } from './RepositoryListContainer';
 
 const RepositoryList = () => {
-  const { data } = useRepositories();
+  const { data, loading } = useRepositories();
 
-  return <RepositoryListContainer repositories={data.repositories} />;
+
+  return (<View>{loading ? null : <RepositoryListContainer repositories={data.repositories} />}</View>);
 };
 
 export default RepositoryList;

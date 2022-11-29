@@ -5,6 +5,7 @@ query {
     repositories {
         edges {
             node {
+                id
                 description
                 forksCount
                 fullName
@@ -16,8 +17,7 @@ query {
               }
         }
       }
-}
-`
+}`
 
 export const GET_LOGGED_IN_USER = gql`
 query {
@@ -25,4 +25,45 @@ query {
     id
     username
   }
-}`
+}
+`;
+
+export const GET_REPOSITORY = gql`
+query Repository($id: ID!) {
+  repository(id: $id) {
+    id
+    fullName
+    url
+    description
+    language
+    ownerAvatarUrl
+    reviewCount
+    ratingAverage
+    stargazersCount
+    forksCount
+  }
+}
+`;
+
+// export const GET_REPOSITORY_REVIEWS = gql`
+// query reviews($id: String!) {
+//   repository($id) {
+//     id
+//     fullName
+//     reviews {
+//       edges {
+//         node {
+//           id
+//           text
+//           rating
+//           createdAt
+//           user {
+//             id
+//             username
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+// `
