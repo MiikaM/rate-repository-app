@@ -87,6 +87,7 @@ query Reviews($id: ID!) {
             id
             username
           }
+          respositoryId
         }
       }
       cursor

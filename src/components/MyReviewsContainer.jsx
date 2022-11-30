@@ -22,7 +22,7 @@ const MyReviewsContainer = (props) => {
         <FlatList style={styles.container}
             data={reviewNodes}
             ItemSeparatorComponent={ItemSeparator}
-            renderItem={({ item }) => <ReviewItem item={item} />}
+            renderItem={({ item }) => <ReviewItem item={item} navigation={props.navigation} myReviews={true} deleteReview={props.deleteReview} />}
         />
     )
 }

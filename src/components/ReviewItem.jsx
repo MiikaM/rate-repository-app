@@ -1,4 +1,5 @@
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
+import Button from "./Button";
 import Card from "./Card";
 import Text from "./Text";
 
@@ -31,9 +32,35 @@ const styles = StyleSheet.create({
     }
 });
 
-const ReviewItem = ({ item }) => {
+const ReviewItem = ({ item, myReviews = false, navigation, deleteReview }) => {
     const date = new Date(item.createdAt);
     const formattedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
+
+    const handleDeleteReview = () => {
+        console.log('Deleting a review!');
+        deleteReview({ id: item.id });
+
+    }
+
+    const createTwoButtonAlert = () =>
+        Alert.alert(
+            "Delete review",
+            "Are you sure you want to delete this review?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                },
+                {
+                    text: "Delete",
+                    onPress: () => handleDeleteReview
+                }
+            ]
+        );
+    const navigate = () => {
+        navigation({id: item.respositoryId})
+    }
 
     return (
         <Card testID="repositoryItem"  >
@@ -45,6 +72,13 @@ const ReviewItem = ({ item }) => {
                     <Text>{item?.text}</Text>
                 </View>
             </View>
+            {
+                myReviews ? <View style={styles.flexBox}>
+                    <Button onPress={navigate} title="View repository" />
+                    <Button onPress={createTwoButtonAlert} title="Delete review" />
+                </View> : null
+            }
+
         </Card>
 
 

@@ -28,3 +28,9 @@ mutation createReview($ownerName: String!, $rating: Int!, $repositoryName: Strin
       }
     }
 }`
+
+export const DELETE_REVIEW = gql`
+mutation deleteReview($id: ID!) {
+  deleteReview(review: {id: $id}){
+  }
+}`
