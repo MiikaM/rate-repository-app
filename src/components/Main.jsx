@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Navigate,  Route, Routes, useNavigate } from 'react-router-native';
+import { Navigate,  Route, Routes } from 'react-router-native';
 import AppBar from './AppBar';
 import CreateReviewContainer from './CreateReviewContainer';
 import RepositoryList from './RepositoryList';
@@ -17,11 +16,11 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
-  useEffect(() => {
-    navigate("/user/create");
-  }, [])
+  // useEffect(() => {
+  //   navigate("/user/create");
+  // }, [])
 
   return (
     <View style={styles.container}>
