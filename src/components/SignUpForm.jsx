@@ -17,20 +17,23 @@ const styles = StyleSheet.create({
 })
 
 const validationSchema = yup.object().shape({
-    username: yup.string().required('Username is required'),
-    password: yup.string().min(5, 'Password must be longer or equal than 5 characters').required('Password is required')
+    username: yup.string().required('Username is required').min(1, 'Username too short! Must have the length between 1 and 30 characters.').max(30, 'Username too long! Must have the length between 1 and 30 characters.'),
+    password:  yup.string().required('Password is required').min(5, 'Password too short! Must have the length between 5 and 50 characters.').max(50, "Password too short! Must have the length between 5 and 50 characters." ),
+    passwordConfirmation: yup.string().required('Confirm your password').oneOf([yup.ref('password'), null], "Passwords must match")
 });
 
 
-const SignInForm = ({ onSubmit }) => {
+const SignUpForm = ({ onSubmit }) => {
 
     const handleSubmit = (values) => {
+        console.dir({values});        
         onSubmit(values);
     }
 
     const initialValues = {
         username: "",
-        password: ""
+        password: "",
+        passwordConfirmation: "",
     }
 
     return (
@@ -39,13 +42,14 @@ const SignInForm = ({ onSubmit }) => {
                 {({ handleSubmit }) => (
                     <View>
                         <FormikTextInput name="username" placeholder="Username" />
-                        <FormikTextInput name="password" placeholder="Password" secureTextEntry />
+                        <FormikTextInput name="password" placeholder="Password" secureTextEntry/>
+                        <FormikTextInput name="passwordConfirmation" placeholder="Password confirmation" secureTextEntry/>
                         <Pressable style={styles.button} onPress={handleSubmit}>
-                            <Text color="off-white" fontWeight="bold">Sign In</Text>
+                            <Text color="off-white" fontWeight="bold">Sign Up</Text>
                         </Pressable>
                     </View>)}
             </Formik>
         </Card>)
 }
 
-export default SignInForm;
+export default SignUpForm;

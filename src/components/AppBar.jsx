@@ -57,6 +57,11 @@ const AppBar = () => {
                         <Text fontWeight="bold" color="off-white" fontSize="subheading">Sign in</Text>
                     </Link>
                 }
+                {
+                    data?.me ? null : <Link style={styles.scrollViewItem} to="/user/create" >
+                        <Text fontWeight="bold" color="off-white" fontSize="subheading">Sign Up</Text>
+                    </Link>
+                }
             </ScrollView>
 
         </View >);
