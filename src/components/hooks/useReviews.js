@@ -1,16 +1,29 @@
 import { useQuery } from '@apollo/client';
 import { GET_REVIEWS } from '../graphql/queries';
 
-const useReviews = ({id}) => {
-    const { data, loading, error, refetch } = useQuery(GET_REVIEWS, {
-        variables : {id: id},
+const useReviews = (variables) => {
+    const { data, loading, error, fetchMore, ...result } = useQuery(GET_REVIEWS, {
+        variables: {
+            id: variables.id,
+            first: variables.first
+        },
         fetchPolicy: "cache-and-network"
     })
 
-    console.log({ data, loading });
+    const handleFetchMore = () => {
+        const canFetchMore = !loading && data.repository.reviews.pageInfo.hasNextPage;
 
+        if (!canFetchMore) return;
 
-    return { reviews: data, reviewsLoading: loading, refetch, error };
+        fetchMore({
+            variables: {
+                after: data.repository.reviews.pageInfo.endCursor,
+                ...variables
+            }
+        })
+    }
+
+    return { reviews: data, reviewsLoading: loading, fetchMore: handleFetchMore, error, ...result };
 };
 
 export default useReviews;

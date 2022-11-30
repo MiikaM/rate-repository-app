@@ -14,8 +14,6 @@ const SearchBar = ({ search, searchText }) => {
         search(searchQuery);
     }, 100)
 
-
-
     return (
         <Searchbar
             placeholder="Search"

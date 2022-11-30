@@ -58,6 +58,8 @@ export class RepositoryListContainer extends React.Component {
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => <RepositoryItem item={item} navigation={this.props.navigation} />}
         ListHeaderComponent={this.renderHead}
+        onEndReached={this.props.onEndReach}
+        onEndReachedThreshold={1}
       />)
   }
 }

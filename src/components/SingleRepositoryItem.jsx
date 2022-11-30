@@ -9,13 +9,16 @@ const SingleRepositoryItem = () => {
     // Change to get one repository info
     const { repositoryId } = useParams();
     const { data, loading } = useRepository({ id: repositoryId });
-    const { reviews, reviewsLoading } = useReviews({ id: repositoryId });
+    const { reviews, reviewsLoading, fetchMore } = useReviews({ first: 4, id: repositoryId });
 
-    console.log('Happens', {data,reviews});
-    
+    console.log('Happens', { data, reviews });
+    const onEndReach = () => {
+        fetchMore()
+    }
+
     return (
         <View>
-            {(reviewsLoading || loading) ? null : <SingleRepositoryContainer reviews={reviews.repository.reviews} repository={data.repository} />}
+            {(reviewsLoading || loading) ? null : <SingleRepositoryContainer reviews={reviews.repository.reviews} repository={data.repository} onEndReach={onEndReach} />}
         </View>
     )
 }

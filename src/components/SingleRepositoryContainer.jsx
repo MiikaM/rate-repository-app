@@ -10,19 +10,18 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const SingleRepositoryContainer = ({ reviews, repository }) => {
+const SingleRepositoryContainer = ({ reviews, repository, onEndReach }) => {
     //Implement    
     const reviewNodes = reviews
         ? reviews.edges.map((edge) => edge.node)
         : [];
-
-        console.log('Happens in container', {reviews, repository, reviewNodes});
         
     return (
         <FlatList
             data={reviewNodes}
             renderItem={({ item }) => <ReviewItem item={item} />}
             keyExtractor={({ id }) => id}
+            onEndReached={onEndReach}
             ItemSeparatorComponent={ItemSeparator}
             ListHeaderComponent={() => <RepositoryItem item={repository} itemView={true} />} />
     );

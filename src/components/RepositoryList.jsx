@@ -9,7 +9,12 @@ const RepositoryList = () => {
   const [sortOrder, setSortOrder] = useState("CREATED_AT");
   const [sortDirection, setSortDirection] = useState("DESC");
   const [searchKeyword, setSearchKeyword] = useState("");
-  const { data, loading } = useRepositories({ orderBy: sortOrder, orderDirection: sortDirection, searchKeyword: searchKeyword });
+  const { data, loading, fetchMore } = useRepositories({
+    first: 5,
+    orderBy: sortOrder,
+    orderDirection: sortDirection,
+    searchKeyword: searchKeyword
+  });
 
   const updateSort = ({ sortOrder, sortDirection }) => {
     setSortOrder(sortOrder);
@@ -18,10 +23,13 @@ const RepositoryList = () => {
   const updateSearch = (query) => setSearchKeyword(query);
 
   const navigation = ({ id }) => {
-    console.log(`Navigation id: ${id}`);
     navigate(`/repository/${id}`);
   }
-  console.log({ searchKeyword });
+
+  const onEndReach = () => {
+    console.log('You have reached the end of the list!');
+    fetchMore();
+  }
 
   return (<View>{loading
     ? null
@@ -29,6 +37,7 @@ const RepositoryList = () => {
       search={updateSearch}
       setSort={updateSort}
       searchText={searchKeyword}
+      onEndReach={onEndReach}
     />}</View>);
 };
 
