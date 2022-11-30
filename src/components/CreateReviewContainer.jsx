@@ -1,29 +1,26 @@
-import useSignIn from './hooks/useSignIn';
-import { useNavigate } from 'react-router-native';
-import SignInForm from './SignInForm';
+import { redirect } from 'react-router-native';
 import CreateReviewForm from './CreateReviewForm';
+import useCreateReview from './hooks/useCreateReview';
 
-const SignInContainer = () => {
-    const [createReview] = useCreateReview();
-    let navigate = useNavigate();
+const CreateReviewContainer = () => {
+    const [newReview] = useCreateReview();
 
     const onSubmit = async (values) => {
-        const { username, name, rating, text } = values;
+        const { ownerName, repositoryName, rating, text } = values;
         try {
-            const { data } = await createReview({ username, name, rating, text });
-            console.log(`Congratulations you logged in as user with accesstoken: ${data.authenticate.accessToken}`);
-            navigate("../", { replace: true })
+            const ratingNumber = parseInt(rating);
+            const { data } = await newReview({ ownerName, repositoryName, rating: ratingNumber, text });
+            console.log(`Congratulations you logged just created a new review for repository: ${data.createReview.repository.name}`);
+            return redirect("./");
         } catch (error) {
             console.error({ error });
         }
     };
-
-
-
+    
     return (
         <CreateReviewForm onSubmit={onSubmit} />
     );
 };
 
 
-export default SignInContainer;
+export default CreateReviewContainer;

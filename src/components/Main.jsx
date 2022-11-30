@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-native';
 import AppBar from './AppBar';
+import CreateReviewContainer from './CreateReviewContainer';
 import RepositoryList from './RepositoryList';
 import SignInContainer from './SignInContainer';
 import SingleRepositoryItem from './SingleRepositoryItem';
@@ -18,10 +19,8 @@ const styles = StyleSheet.create({
 const Main = () => {
   let navigate = useNavigate();
 
-
-
   useEffect(() => {
-    navigate("/repository/jaredpalmer.formik");
+    navigate("/review/create");
   }, [])
   
   return (
@@ -31,8 +30,8 @@ const Main = () => {
         <Route path="/" element={<RepositoryList />} exact />
         <Route path="/repository/:repositoryId" element={<SingleRepositoryItem />} />
         <Route path="/signIn" element={<SignInContainer />} />
+        <Route path="/review/create" element={<CreateReviewContainer />} />
         <Route path="*" element={<Navigate to="/" replace />} />
-
       </Routes>
     </View>
   );

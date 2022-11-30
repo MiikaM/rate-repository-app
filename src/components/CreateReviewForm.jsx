@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
 })
 
 const validationSchema = yup.object().shape({
-    username: yup.string().min(3, 'Username must be longer or equal than 8 characters').required('Username is required'),
-    repositoryId: yup.string().min(3, 'Password must be longer or equal than 5 characters').required('Password is required'),
-    rating: yup.number().min(0, "You can give a minimum rating of 0!").max(100, "You can give a maximum rating of 100!").required("Rating is required!")
+    ownerName: yup.string().min(3, 'Username must be longer or equal than 8 characters').required('Username is required'),
+    repositoryName: yup.string().min(3, 'Password must be longer or equal than 5 characters').required('Password is required'),
+    rating: yup.number().integer("The value must be an integer type!").min(0, "You can give a minimum rating of 0!").max(100, "You can give a maximum rating of 100!").required("Rating is required!")
 
 });
 
@@ -27,12 +27,15 @@ const validationSchema = yup.object().shape({
 const CreateReviewForm = ({ onSubmit }) => {
 
     const handleSubmit = (values) => {
+        console.dir({values});
+        // return redirect("/review/create")
+        
         onSubmit(values);
     }
 
     const initialValues = {
-        username: "",
-        repositoryId: "",
+        ownerName: "",
+        repositoryName: "",
         rating: "",
         text: ""
     }
@@ -42,8 +45,8 @@ const CreateReviewForm = ({ onSubmit }) => {
             <Formik validationSchema={validationSchema} initialValues={initialValues} onSubmit={handleSubmit}>
                 {({ handleSubmit }) => (
                     <View>
-                        <FormikTextInput name="username" placeholder="Repository owner name" />
-                        <FormikTextInput name="repositoryId" placeholder="Repository name" secureTextEntry />
+                        <FormikTextInput name="ownerName" placeholder="Repository owner name" />
+                        <FormikTextInput name="repositoryName" placeholder="Repository name" />
                         <FormikTextInput name="rating" placeholder="Rating between 0 and 100" />
                         <FormikTextInput name="text" placeholder="Review" multiline />
                         <Pressable style={styles.button} onPress={handleSubmit}>

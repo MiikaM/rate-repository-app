@@ -10,13 +10,15 @@ mutation authenticate($username: String!, $password: String!){
 
 //TODO
 export const CREATE_REVIEW = gql`
-mutation createReview($ownerName: String!, rating: Int!, repositoryName: String!, text: String) {
-    createReview(review: {ownerName: $ownerName, repositoryName: $repositoryName, text: $text, rating: $rating}) {
+mutation createReview($ownerName: String!, $rating: Int!, $repositoryName: String!, $text: String) {
+    createReview(review: {ownerName: $ownerName, repositoryName: $repositoryName, rating: $rating, text: $text}) {
       createdAt
-    rating
-    repositoryId
-    text
-    userId
+      rating
+      repositoryId
+      text
+      userId
+      repository {
+        name
+      }
     }
-  
 }`
