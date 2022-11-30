@@ -51,6 +51,11 @@ const AppBar = () => {
                     </Link> : null
                 }
                 {
+                    data?.me ? <Link style={styles.scrollViewItem} to="/me/reviews" >
+                        <Text fontWeight="bold" color="off-white" fontSize="subheading">My reviews</Text>
+                    </Link> : null
+                }
+                {
                     data?.me ? <Pressable style={styles.scrollViewItem} onPress={signOut} >
                         <Text fontWeight="bold" color="off-white" fontSize="subheading">Sign Out</Text>
                     </Pressable> : <Link style={styles.scrollViewItem} to="/signIn" >
