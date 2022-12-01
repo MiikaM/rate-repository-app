@@ -1,4 +1,5 @@
 import {
+
     Image, StyleSheet,
     View
 } from 'react-native';
@@ -6,13 +7,14 @@ import Card from './Card';
 import Tag from './Tag';
 import Stat from './Stat';
 import Text from './Text';
+import Button from './Button';
+import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
     flexBox: {
         display: "flex",
         flexDirection: "row",
         padding: 5,
-        // alignItems: "center"
     },
     flexItem: {
         flexGrow: 1,
@@ -22,25 +24,34 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         paddingLeft: 40
     },
-
     tinyLogo: {
         width: 50,
         height: 50,
         borderRadius: 5,
-        // marginLeft: 10,
         marginRight: 10
     }
 });
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, navigation, itemView = false }) => {
+    const navigate = (event) => {
+        event.preventDefault();
+        !itemView ? navigation({ id: item.id }) : null;
+    }
+
+    const openGithub = (event) => {
+        event.preventDefault();
+        Linking.openURL(item.url);
+    }
+
+    if (!item) return null;
 
     return (
-        <Card>
+        <Card testID="repositoryItem" onPress={!itemView ? navigate : null} >
             <View style={styles.flexBox}>
                 <Image style={styles.tinyLogo} source={{ uri: item.ownerAvatarUrl }} />
                 <View >
-                    <Text style={styles.flexItem} fontWeight="bold">{item.fullName}</Text>
-                    <Text style={styles.flexItem}>{item.description}</Text>
+                    <Text testID="name" style={styles.flexItem} fontWeight="bold">{item.fullName}</Text>
+                    <Text testID="description" style={styles.flexItem}>{item.description}</Text>
                     <Tag styles={styles.flexItem} text={item.language} />
                 </View>
             </View>
@@ -50,7 +61,12 @@ const RepositoryItem = ({ item }) => {
                 <Stat styles={styles.flexItem} description="Reviews" stat={item.reviewCount} />
                 <Stat styles={styles.flexItem} description="Rating" stat={item.ratingAverage} />
             </View>
+            {
+                itemView ? <Button onPress={openGithub} title='Open in GitHub' /> : null
+            }
+
         </Card>
+
     );
 }
 
