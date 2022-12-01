@@ -4,7 +4,7 @@ import theme from '../theme';
 import Text from './Text';
 import { Link, useNavigate } from 'react-router-native';
 import { useApolloClient } from '@apollo/client';
-import useCheckUser from './hooks/checkUser';
+import useCheckUser from './hooks/useCheckUser';
 import useAuthStorage from './hooks/useAuthStorage';
 
 
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     scrollViewItem: {
         paddingLeft: 10
     }
-    // ...
 });
 
 const AppBar = () => {

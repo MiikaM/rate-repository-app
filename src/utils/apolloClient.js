@@ -9,7 +9,7 @@ const httpLink = createHttpLink({
   uri: apollo_uri,
 });
 
-const cache = InMemoryCache({
+const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {

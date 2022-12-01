@@ -8,7 +8,8 @@ import SortRepositories from "./SortRepositories";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#E1E5E8"
+    backgroundColor: "#E1E5E8",
+    height: "88%"
   }
 });
 
@@ -28,6 +29,10 @@ export class RepositoryListContainer extends React.Component {
       ? this.props.repositories.edges.map((edge) => edge.node)
       : [];
 
+    console.dir({ repositoryNodes });
+
+
+
     return (
       <FlatList style={styles.container}
         data={repositoryNodes}
@@ -35,7 +40,7 @@ export class RepositoryListContainer extends React.Component {
         renderItem={({ item }) => <RepositoryItem item={item} navigation={this.props.navigation} />}
         ListHeaderComponent={this.renderHead}
         onEndReached={this.props.onEndReach}
-        onEndReachedThreshold={1}
+        onEndReachedThreshold={0.5}
       />)
   }
 }

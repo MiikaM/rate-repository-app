@@ -10,7 +10,7 @@ const RepositoryList = () => {
   const [sortDirection, setSortDirection] = useState("DESC");
   const [searchKeyword, setSearchKeyword] = useState("");
   const { data, loading, fetchMore } = useRepositories({
-    first: 5,
+    first: 8,
     orderBy: sortOrder,
     orderDirection: sortDirection,
     searchKeyword: searchKeyword

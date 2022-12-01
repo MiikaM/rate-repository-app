@@ -8,7 +8,7 @@ mutation authenticate($username: String!, $password: String!){
   }
 `
 
-export const CREATE_USER =gql`
+export const CREATE_USER = gql`
 mutation createUser($username: String!, $password: String!) {
   createUser(user: {username: $username, password: $password}) {
     id
@@ -30,7 +30,6 @@ mutation createReview($ownerName: String!, $rating: Int!, $repositoryName: Strin
 }`
 
 export const DELETE_REVIEW = gql`
-mutation deleteReview($id: ID!) {
-  deleteReview(review: {id: $id}){
-  }
+mutation deleteReview($deleteReviewId: ID!) {
+  deleteReview(id: $deleteReviewId)
 }`

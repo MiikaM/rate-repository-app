@@ -7,20 +7,16 @@ const styles = StyleSheet.create({
     flexBox: {
         display: "flex",
         flexDirection: "row",
-        // flexWrap: "wrap",
         padding: 10,
-        // margin: 5,
         maxWidth: "90%"
     },
     flexItem: {
         flexGrow: 1,
         margin: 2,
-        // maxWidth: "50%"
     },
     rating: {
         textAlign: "center",
         textAlignVertical: "center",
-        // textAlignHorizontal: "center",
         borderColor: "#1C59B3",
         color: "#1C59B3",
         borderWidth: 2,
@@ -39,6 +35,10 @@ const ReviewItem = ({ item, myReviews = false, navigation, deleteReview }) => {
     const handleDeleteReview = () => {
         console.log('Deleting a review!');
         deleteReview({ id: item.id });
+    }
+
+    const handleNavigate = () => {
+        navigation({ id: item.repositoryId })
 
     }
 
@@ -54,13 +54,10 @@ const ReviewItem = ({ item, myReviews = false, navigation, deleteReview }) => {
                 },
                 {
                     text: "Delete",
-                    onPress: () => handleDeleteReview
+                    onPress: () => handleDeleteReview()
                 }
             ]
         );
-    const navigate = () => {
-        navigation({id: item.respositoryId})
-    }
 
     return (
         <Card testID="repositoryItem"  >
@@ -74,7 +71,7 @@ const ReviewItem = ({ item, myReviews = false, navigation, deleteReview }) => {
             </View>
             {
                 myReviews ? <View style={styles.flexBox}>
-                    <Button onPress={navigate} title="View repository" />
+                    <Button onPress={handleNavigate} title="View repository" />
                     <Button onPress={createTwoButtonAlert} title="Delete review" />
                 </View> : null
             }

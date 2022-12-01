@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_REPOSITORIES = gql`
-query repositories($orderBy: AllRepositoriesOrderBy!, $orderDirection: OrderDirection!, $searchKeyword: String) {
-  repositories(orderBy: $orderBy, orderDirection: $orderDirection, searchKeyword: $searchKeyword) {
+query repositories($after: String,$first: Int, $orderBy: AllRepositoriesOrderBy!, $orderDirection: OrderDirection!, $searchKeyword: String) {
+  repositories(after: $after, first: $first, orderBy: $orderBy, orderDirection: $orderDirection, searchKeyword: $searchKeyword) {
     edges {
       node {
         description
@@ -26,7 +26,7 @@ query repositories($orderBy: AllRepositoriesOrderBy!, $orderDirection: OrderDire
 }`
 
 export const GET_USER = gql`
-query getUser($withReviews: Boolean = False){
+query getUser($withReviews: Boolean = false){
   me{
     id
     username
@@ -41,6 +41,7 @@ query getUser($withReviews: Boolean = False){
             id
             username
           }
+          repositoryId
         }
         cursor
       }
@@ -72,11 +73,11 @@ query Repository($id: ID!) {
 `;
 
 export const GET_REVIEWS = gql`
-query Reviews($id: ID!) {
+query Reviews($id: ID!, $after: String, $first: Int) {
   repository(id: $id) {
     id
     fullName
-    reviews {
+    reviews(first: $first, after: $after) {
       edges {
         node {
           id
@@ -87,15 +88,14 @@ query Reviews($id: ID!) {
             id
             username
           }
-          respositoryId
         }
+        cursor
       }
-      cursor
-    }
-    pageInfo {
-      endCursor
-      startCursor
-      hasNextPage
+      pageInfo {
+        endCursor
+        hasNextPage
+        startCursor
+      }
     }
   }
 }

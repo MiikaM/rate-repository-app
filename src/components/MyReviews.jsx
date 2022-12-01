@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { useNavigation } from "react-router-native";
+import { useNavigate } from "react-router-native";
 import useCheckUser from "./hooks/useCheckUser"
 import useDeleteReview from "./hooks/useDeleteReview";
 import MyReviewsContainer from "./MyReviewsContainer";
@@ -8,8 +8,8 @@ import MyReviewsContainer from "./MyReviewsContainer";
 
 const MyReviews = () => {
     const { data, loading, refetch } = useCheckUser({ withReviews: true });
-    const { removeReview } = useDeleteReview()
-    const navigate = useNavigation();
+    const [removeReview] = useDeleteReview()
+    const navigate = useNavigate();
 
     const navigateRepository = (variables) => {
         navigate(`/repository/${variables.id}`);

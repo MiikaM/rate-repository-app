@@ -5,8 +5,10 @@ import { DELETE_REVIEW } from "../graphql/mutations"
 const useDeleteReview = () => {
     const [deleteReview, result] = useMutation(DELETE_REVIEW);
 
-    const removeReview = async (variables) => {
-        const response = await deleteReview({ variables: variables })
+    const removeReview = async (variables) => {        
+        const response = await deleteReview({ variables: { deleteReviewId: variables.id } })
+        console.log({ response });
+
         return response;
     }
 
