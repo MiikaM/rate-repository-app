@@ -40,8 +40,6 @@ const RepositoryItem = ({ item, navigation, itemView = false }) => {
 
     const openGithub = (event) => {
         event.preventDefault();
-        console.log('This happens');
-
         Linking.openURL(item.url);
     }
 

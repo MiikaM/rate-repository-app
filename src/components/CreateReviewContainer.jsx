@@ -5,19 +5,19 @@ import useCreateReview from './hooks/useCreateReview';
 const CreateReviewContainer = () => {
     const [newReview] = useCreateReview();
     const navigate = useNavigate();
-    
+
     const onSubmit = async (values) => {
         const { ownerName, repositoryName, rating, text } = values;
         try {
             const ratingNumber = parseInt(rating);
+            // eslint-disable-next-line no-unused-vars
             const { data } = await newReview({ ownerName, repositoryName, rating: ratingNumber, text });
-            console.log(`Congratulations you logged just created a new review for repository: ${data.createReview.repository.name}`);
             navigate("../");
         } catch (error) {
             console.error({ error });
         }
     };
-    
+
     return (
         <CreateReviewForm onSubmit={onSubmit} />
     );

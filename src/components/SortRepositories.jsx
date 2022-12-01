@@ -25,7 +25,6 @@ const SortRepositories = ({ setSort }) => {
 
     const changeSort = (event, sort, title) => {
         event.preventDefault();
-        console.dir({ event });
         setTitle(title);
         setSort({ sortOrder: sort[0], sortDirection: sort[1] })
         closeMenu();

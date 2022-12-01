@@ -9,8 +9,8 @@ const SignInContainer = () => {
     const onSubmit = async (values) => {
         const { username, password } = values;
         try {
+            // eslint-disable-next-line no-unused-vars
             const { data } = await signIn({ username, password });
-            console.log(`Congratulations you logged in as user with accesstoken: ${data.authenticate.accessToken}`);
             navigate("../", { replace: true })
         } catch (error) {
             console.error({ error });

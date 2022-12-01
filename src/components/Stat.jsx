@@ -39,8 +39,6 @@ const LookUp = [
 ];
 
 const statFormatter = (number) => {
-    // console.log(typeof number);
-    // if (typeof(number) !== "number" || typeof(number) !== "bigint") return "";
     for (let index = LookUp.length - 1; index >= 0; index--) {
         if (number >= LookUp[index].value) {
             const formattedNumber = `${(number / LookUp[index].value).toFixed(

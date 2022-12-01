@@ -26,7 +26,6 @@ const validationSchema = yup.object().shape({
 const SignUpForm = ({ onSubmit }) => {
 
     const handleSubmit = (values) => {
-        console.dir({values});        
         onSubmit(values);
     }
 

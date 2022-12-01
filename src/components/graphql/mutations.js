@@ -9,7 +9,7 @@ mutation authenticate($username: String!, $password: String!){
 `
 
 export const CREATE_USER = gql`
-mutation createUser($username: String!, $password: String!) {
+mutation signUpUser($username: String!, $password: String!) {
   createUser(user: {username: $username, password: $password}) {
     id
   }

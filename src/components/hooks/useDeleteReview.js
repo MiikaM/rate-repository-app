@@ -7,8 +7,6 @@ const useDeleteReview = () => {
 
     const removeReview = async (variables) => {        
         const response = await deleteReview({ variables: { deleteReviewId: variables.id } })
-        console.log({ response });
-
         return response;
     }
 

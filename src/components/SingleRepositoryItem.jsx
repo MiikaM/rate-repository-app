@@ -10,9 +10,7 @@ const SingleRepositoryItem = () => {
     const { repositoryId } = useParams();
     const { data, loading } = useRepository({ id: repositoryId });
     const { reviews, reviewsLoading, fetchMore } = useReviews({ first: 5, id: repositoryId });
-    console.log();
     
-    console.log('Happens', {repositoryId, reviewsLoading, reviews });
     const onEndReach = () => {
         fetchMore()
     }

@@ -29,10 +29,6 @@ export class RepositoryListContainer extends React.Component {
       ? this.props.repositories.edges.map((edge) => edge.node)
       : [];
 
-    console.dir({ repositoryNodes });
-
-
-
     return (
       <FlatList style={styles.container}
         data={repositoryNodes}

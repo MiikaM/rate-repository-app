@@ -13,11 +13,7 @@ const useRepositories = (variables) => {
     })
 
     const handleFetchMore = () => {
-        const canFetchMore = !loading && data.repositories.pageInfo.hasNextPage;
-        console.log(`handlefetchmore happens: ${canFetchMore} `);
-        console.dir(data.repositories);
-        
-        
+        const canFetchMore = !loading && data.repositories.pageInfo.hasNextPage;     
         
         if (!canFetchMore) return;
 
