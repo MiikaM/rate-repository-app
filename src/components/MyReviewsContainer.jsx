@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
         height: 5,
     },
     container: {
-        backgroundColor: "#E1E5E8"
+        backgroundColor: "#E1E5E8",
+        height: "88%"
     }
 });
 

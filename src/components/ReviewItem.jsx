@@ -25,6 +25,17 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginRight: 10,
         marginTop: 5
+    },
+    navigateButton: {
+        backgroundColor: "#0165D4",
+        width: "40%"
+    },
+    alertDelete: {
+        backgroundColor: "#D6394C",
+        width: "40%"
+    },
+    buttonContainer: {
+        justifyContent: "space-around",
     }
 });
 
@@ -33,13 +44,11 @@ const ReviewItem = ({ item, myReviews = false, navigation, deleteReview }) => {
     const formattedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
 
     const handleDeleteReview = () => {
-        console.log('Deleting a review!');
         deleteReview({ id: item.id });
     }
 
     const handleNavigate = () => {
         navigation({ id: item.repositoryId })
-
     }
 
     const createTwoButtonAlert = () =>
@@ -54,7 +63,8 @@ const ReviewItem = ({ item, myReviews = false, navigation, deleteReview }) => {
                 },
                 {
                     text: "Delete",
-                    onPress: () => handleDeleteReview()
+                    onPress: () => handleDeleteReview(),
+                    style: "destructive"
                 }
             ]
         );
@@ -64,18 +74,17 @@ const ReviewItem = ({ item, myReviews = false, navigation, deleteReview }) => {
             <View style={styles.flexBox}>
                 <Text style={styles.rating} fontSize="subheading" fontWeight="bold">{item?.rating}</Text>
                 <View>
-                    <Text fontWeight="bold">{item?.user?.username}</Text>
+                    <Text fontWeight="bold">{myReviews ? `${item?.repository?.ownerName}/${item?.repository?.name}` : `${item?.user?.username}`}</Text>
                     <Text>{formattedDate}</Text>
                     <Text>{item?.text}</Text>
                 </View>
             </View>
             {
-                myReviews ? <View style={styles.flexBox}>
-                    <Button onPress={handleNavigate} title="View repository" />
-                    <Button onPress={createTwoButtonAlert} title="Delete review" />
+                myReviews ? <View style={{ ...styles.flexBox, ...styles.buttonContainer }}>
+                    <Button style={styles.navigateButton} onPress={handleNavigate} title="View repository" />
+                    <Button style={styles.alertDelete} onPress={createTwoButtonAlert} title="Delete review" />
                 </View> : null
             }
-
         </Card>
 
 

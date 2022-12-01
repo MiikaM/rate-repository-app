@@ -42,6 +42,10 @@ query getUser($withReviews: Boolean = false){
             username
           }
           repositoryId
+          repository {
+            name
+            ownerName
+          }
         }
         cursor
       }

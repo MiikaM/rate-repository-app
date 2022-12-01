@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { View } from "react-native";
 import { useNavigate } from "react-router-native";
 import useCheckUser from "./hooks/useCheckUser"
@@ -19,11 +20,16 @@ const MyReviews = () => {
         removeReview({ id: variables.id });
         refetch();
     }
+    useEffect(() => {
+
+        if (!loading && !data?.me) navigate("../", { replace: true });
+    }, [])
+
 
     return (
         <View>
             {
-                loading ? null : <MyReviewsContainer reviews={data.me.reviews} navigation={navigateRepository} deleteReview={handleDeleteReview} />
+                loading ? null : <MyReviewsContainer reviews={data?.me?.reviews} navigation={navigateRepository} deleteReview={handleDeleteReview} />
             }
         </View>
     )
