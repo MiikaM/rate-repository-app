@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import useRepositories from './hooks/useRepositories';
-import { RepositoryListContainer } from './RepositoryListContainer';
+import {RepositoryListContainer} from './RepositoryListContainer';
 import { useNavigate } from 'react-router-native';
 
 const RepositoryList = () => {
@@ -10,7 +10,7 @@ const RepositoryList = () => {
   const [sortDirection, setSortDirection] = useState("DESC");
   const [searchKeyword, setSearchKeyword] = useState("");
   const { data, loading, fetchMore } = useRepositories({
-    first: 8,
+    first: 3,
     orderBy: sortOrder,
     orderDirection: sortDirection,
     searchKeyword: searchKeyword
@@ -30,14 +30,18 @@ const RepositoryList = () => {
     fetchMore();
   }
 
-  return (<View>{loading
-    ? null
-    : <RepositoryListContainer navigation={navigation} repositories={data?.repositories}
-      search={updateSearch}
-      setSort={updateSort}
-      searchText={searchKeyword}
-      onEndReach={onEndReach}
-    />}</View>);
+  return (<View>{
+    loading ? null :
+      <RepositoryListContainer
+        navigation={navigation}
+        repositories={data.repositories}
+        search={updateSearch}
+        setSort={updateSort}
+        searchText={searchKeyword}
+        onEndReach={onEndReach}
+      />
+  }
+  </View>);
 };
 
 export default RepositoryList;

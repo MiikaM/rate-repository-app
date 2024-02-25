@@ -1,10 +1,8 @@
 import React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import ItemSeparator from "./ItemSeparator";
-// import { useNavigate } from "react-router-native";
 import RepositoryItem from "./RepositoryItem";
-import SearchBar from "./SearchBar";
-import SortRepositories from "./SortRepositories";
+import RepositoryListHeader from "./RepositoryListHeader";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,10 +16,8 @@ export class RepositoryListContainer extends React.Component {
   renderHead = () => {
     const props = this.props;
 
-    return (<View>
-      <SearchBar search={props.search} searchText={props.searchText} />
-      <SortRepositories setSort={props.setSort} />
-    </View>)
+    return (
+      <RepositoryListHeader search={props.search} searchText={props.searchText} setSort={props.setSort} />)
   }
 
   render() {
