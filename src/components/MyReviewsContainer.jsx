@@ -15,11 +15,9 @@ const styles = StyleSheet.create({
 
 const MyReviewsContainer = (props) => {
 
-    const reviewNodes = props.reviews
-        ? props.reviews.edges.map((edge) => edge.node)
-        : [];
-
-
+    let reviewNodes = props.reviews
+    ? props.reviews.edges.map((edge) => edge.node)
+    : [];
 
     return (
         <FlatList style={styles.container}

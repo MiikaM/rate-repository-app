@@ -20,18 +20,21 @@ const MyReviews = () => {
         removeReview({ id: variables.id });
         refetch();
     }
-    useEffect(() => {
 
+    useEffect(() => {
         if (!loading && !data?.me) navigate("../", { replace: true });
     }, [])
 
 
     return (
-        <View>
-            {
-                loading ? null : <MyReviewsContainer reviews={data?.me?.reviews} navigation={navigateRepository} deleteReview={handleDeleteReview} />
-            }
-        </View>
+        <>
+        {
+            loading ? null :
+                <View>
+                    <MyReviewsContainer reviews={data?.me?.reviews} navigation={navigateRepository} deleteReview={handleDeleteReview} />
+                </View>
+        }
+        </>
     )
 }
 

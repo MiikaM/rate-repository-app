@@ -3,8 +3,7 @@ import Constants from 'expo-constants';
 import { setContext } from '@apollo/client/link/context';
 import { relayStylePagination } from '@apollo/client/utilities';
 // You might need to change this depending on how you have configured the Apollo Server's URI
-const { apollo_uri } = Constants.manifest.extra;
-
+const { apollo_uri } = Constants.expoConfig.extra;
 const httpLink = createHttpLink({
   uri: apollo_uri,
 });
